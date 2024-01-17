@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkkrjhvknp0t1"]
+
+[ext_resource type="Texture2D" uid="uid://bpcojlmo3rq5a" path="res://img/TileFrames.png" id="1_8e6yc"]
+[ext_resource type="Script" path="res://NeighbourTile.cs" id="1_sobua"]
+[ext_resource type="Shader" path="res://neighbour_tile.gdshader" id="2_uyp3j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1k02"]
+size = Vector2(28, 28)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trdpa"]
+shader = ExtResource("2_uyp3j")
+shader_parameter/col = Color(1, 1, 0.364706, 1)
+
+[node name="NeighbourTile" type="Area2D"]
+position = Vector2(14, 14)
+script = ExtResource("1_sobua")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(1, 1.00539)
+shape = SubResource("RectangleShape2D_o1k02")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_trdpa")
+position = Vector2(3.33786e-06, 6.91414e-06)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("1_8e6yc")
+region_enabled = true
+region_rect = Rect2(267, 15, 235, 235)
+
+[connection signal="input_event" from="." to="." method="OnInput"]
