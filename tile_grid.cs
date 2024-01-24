@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Versioning;
 
 public partial class tile_grid : Node2D
 {
@@ -44,6 +43,22 @@ public partial class tile_grid : Node2D
 		}
 
 		EmitSignal(SignalName.PlayingStateChanged, new Variant[] { _IsPlaying });
+	}
+
+	public void ResetAllTiles()
+	{
+		if (_IsPlaying)
+		{
+			SetPlayingState(0.0);
+		}
+
+		foreach (NeighbourTile[] Row in _NeighbourTiles)
+		{
+			foreach (NeighbourTile Tile in Row)
+			{
+				Tile.SetAlive(false);
+			}
+		}
 	}
 
 	public void OnTimerTimeout()
@@ -219,10 +234,5 @@ public partial class tile_grid : Node2D
 		{
 			tile.SetAlive(false);
 		}
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 }
